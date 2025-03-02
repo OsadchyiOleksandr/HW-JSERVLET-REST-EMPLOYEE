@@ -22,7 +22,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Транзакція стартує
             transaction = session.beginTransaction();
-            String hql = "INSERT INTO employees (name, position, phone) " +
+            String hql = "INSERT INTO Employee (name, position, phone) " +
                     "VALUES (:name, :position, :phone)";
             MutationQuery query = session.createMutationQuery(hql);
             query.setParameter("name", request.name());
@@ -45,7 +45,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             // Транзакція стартує
             transaction = session.beginTransaction();
             List<Employee> list =
-                    session.createQuery("FROM employees", Employee.class).list();
+                    session.createQuery("FROM Employee", Employee.class).list();
             // Транзакція виконується
             transaction.commit();
             // Повертаємо Optional-контейнер з колецією даних
@@ -65,7 +65,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             // Транзакція стартує
             transaction = session.beginTransaction();
             Query<Employee> query =
-                    session.createQuery("FROM employees WHERE id = :id", Employee.class);
+                    session.createQuery("FROM Employee WHERE id = :id", Employee.class);
             query.setParameter("id", id);
             query.setMaxResults(1);
             Employee employee = query.uniqueResult();
@@ -86,7 +86,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Транзакция стартует
             transaction = session.beginTransaction();
-            String hql = "UPDATE employees SET name = :name," +
+            String hql = "UPDATE Employee SET name = :name," +
                     " position = :position, phone = :phone" +
                     " WHERE id = :id";
             MutationQuery query = session.createMutationQuery(hql);
@@ -108,7 +108,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Транзакція стартує
             transaction = session.beginTransaction();
-            String hql = "DELETE FROM employees WHERE id = :id";
+            String hql = "DELETE FROM Employee WHERE id = :id";
             MutationQuery query = session.createMutationQuery(hql);
             query.setParameter("id", id);
             query.executeUpdate();
@@ -132,7 +132,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             // Транзакція стартує
             transaction = session.beginTransaction();
             Query<Employee> query =
-                    session.createQuery("FROM employees ORDER BY id DESC", Employee.class);
+                    session.createQuery("FROM Employee ORDER BY id DESC", Employee.class);
             query.setMaxResults(1);
             Employee employee = query.uniqueResult();
             // Транзакція виконується

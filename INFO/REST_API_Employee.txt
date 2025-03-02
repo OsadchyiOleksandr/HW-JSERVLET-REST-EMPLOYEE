@@ -1,0 +1,124 @@
+
+REST API Employee
+---------------------
+
+Postman для тесту REST API
+https://www.postman.com/
+
+Для здійснення кожного запиту, натискаємо Send .
+Якщо REST-запит має тіло, необхідно налаштування
+в Postman: Body > raw > JSON.
+
+
+(1) Отримання даних
+
+GET
+http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees
+
+Даних, поки, немає.
+
+
+(2) Створення даних
+
+POST
+http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees
+
+Виконуємо окремі запити
+
+        {
+            "name": "Valentin",
+            "position": "qa",
+            "phone": "+380981234567"
+        }
+
+        {
+            "name": "Jam John",
+            "position": "Qa",
+            "phone": "+380981874567"
+        }
+
+        {
+            "name": "Irina Steel",
+            "position": "Qa",
+            "phone": "+380981087400"
+        },
+
+
+Перевіремо через MySQL Workbench.
+
+
+(3) Отримання всіх даних
+
+GET
+http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees
+
+
+(4) Отримання даних за id
+
+За існуючим id
+GET
+http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees/4
+
+За НЕ існуючим id
+GET
+http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees/9
+
+
+(5) Оновлення даних за id
+
+PUT
+http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees/2
+
+        {
+            "name": "Jam George",
+            "position": "Qa",
+            "phone": "+380981874567"
+        }
+
+
+Перевіремо через MySQL Workbench та REST-запит за відповідним id.
+Можемо також спробувати оновлення за НЕ існуючим id.
+
+
+(6) Видалення даних за id
+
+DELETE
+http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees/2
+
+Перевіремо через MySQL Workbench та REST-запит отримання всіх даних.
+Можемо також спробувати видалення за НЕ існуючим id.
+
+
+Curls
+
+Server Check
+curl --location 'http://localhost:8080'
+
+Get All
+curl --location 'http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees'
+
+Get by ID
+curl --location 'http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees/2'
+
+POST
+curl --location 'http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Irina Steel",
+    "position": "Qa",
+    "phone": "+380981087400"
+}'
+
+PUT
+curl --location --request PUT 'http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees/4' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "John Wood",
+    "position": "Dev",
+    "phone": "+380981874567"
+}'
+
+DELETE
+curl --location --request DELETE 'http://localhost:8080/HW-JSERVLET-REST-EMPLOYEE-Build-0001/api/v1/employees/7' \
+--data ''
+

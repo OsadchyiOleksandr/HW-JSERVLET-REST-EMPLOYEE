@@ -2,13 +2,36 @@ cd ~/IDEA/HW-JSERVLET-REST-EMPLOYEE &&
 mvn clean &&
 mvn install &&
 mvn war:war &&
-cd ~/Tomcat11/apache-tomcat-11.0.4/bin &&
+cd ~/Tomcat/apache-tomcat-11.0.4/bin &&
 ./shutdown.sh &&
-cd ~/Tomcat11/apache-tomcat-11.0.4/webapps/ &&
+cd ~/Tomcat/apache-tomcat-11.0.4/webapps/ &&
 rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001.war &&
 rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001 &&
-cd ~/Tomcat11/apache-tomcat-11.0.4/work/Catalina/localhost/ &&
+cd ~/Tomcat/apache-tomcat-11.0.4/work/Catalina/localhost/ &&
 rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001 &&
-cp ~/IDEA/HW-JSERVLET-REST-EMPLOYEE/target/HW-JSERVLET-REST-EMPLOYEE-Build-0001.war ~/Tomcat11/apache-tomcat-11.0.4/webapps/ &&
-cd ~/Tomcat11/apache-tomcat-11.0.4/bin &&
+cp ~/IDEA/HW-JSERVLET-REST-EMPLOYEE/target/HW-JSERVLET-REST-EMPLOYEE-Build-0001.war ~/Tomcat/apache-tomcat-11.0.4/webapps/ &&
+cd ~/Tomcat/apache-tomcat-11.0.4/bin &&
+./startup.sh
+
+
+echo "----------------------------" &&
+echo "----------------------------" &&
+echo "NEW BUILD" &&
+cd ~/IDEA/HW-JSERVLET-REST-EMPLOYEE &&
+mvn clean &&
+mvn install &&
+mvn war:war &&
+echo "DOWN TOMCAT" &&
+cd ~/Tomcat/apache-tomcat-10.1.36/bin &&
+./shutdown.sh &&
+echo "CLEAN TOMCAT" &&
+cd ~/Tomcat/apache-tomcat-10.1.36/webapps/ &&
+rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001.war &&
+rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001 &&
+cd ~/Tomcat/apache-tomcat-10.1.36/work/Catalina/localhost/ &&
+rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001 &&
+echo "MOVE WAR FROM PROJECT TO TOMCAT" &&
+cp ~/IDEA/HW-JSERVLET-REST-EMPLOYEE/target/HW-JSERVLET-REST-EMPLOYEE-Build-0001.war ~/Tomcat/apache-tomcat-10.1.36/webapps/ &&
+echo "RUN TOMCAT" &&
+cd ~/Tomcat/apache-tomcat-10.1.36/bin &&
 ./startup.sh
