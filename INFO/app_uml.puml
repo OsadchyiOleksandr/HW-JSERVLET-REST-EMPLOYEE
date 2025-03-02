@@ -1,0 +1,185 @@
+@startuml
+interface org.example.app.service.BaseService {
+~ T create(S)
+~ List<T> getAll()
+~ T getById(Long)
+~ T update(Long,S)
+~ boolean deleteById(Long)
+}
+
+class org.example.app.dto.employee.EmployeeDtoRequest {
+- Long id
+- String firstName
+- String lastName
+- String email
++ String lastName()
++ String firstName()
++ String email()
++ Long id()
+}
+
+
+interface org.example.app.repository.employee.UserRepository {
+~ void save(UserDtoRequest)
+~ Optional<List<User>> getAll()
+~ Optional<User> getById(Long)
+~ void update(Long,UserDtoRequest)
+~ boolean deleteById(Long)
+~ Optional<User> getLastEntity()
+}
+
+interface org.example.app.repository.BaseRepository {
+~ void save(S)
+~ Optional<List<T>> getAll()
+~ Optional<T> getById(Long)
+~ void update(Long,S)
+~ boolean deleteById(Long)
+}
+
+class org.example.app.controller.EmployeeController {
+- UserService service
+- ObjectMapper objectMapper
+- {static} String CONTENT_TYPE
++ void init(ServletConfig)
+# void doPost(HttpServletRequest,HttpServletResponse)
+# void doGet(HttpServletRequest,HttpServletResponse)
+# void doPut(HttpServletRequest,HttpServletResponse)
+# void doDelete(HttpServletRequest,HttpServletResponse)
+}
+
+
+class org.example.app.service.employee.UserServiceImpl {
+- UserRepository repository
++ User create(UserDtoRequest)
++ List<User> getAll()
++ User getById(Long)
++ User update(Long,UserDtoRequest)
++ boolean deleteById(Long)
+}
+
+
+class org.example.app.config.HibernateUtil {
+- {static} Logger LOGGER
+- {static} SessionFactory sessionFactory
++ {static} SessionFactory getSessionFactory()
+- {static} Configuration getConfiguration()
+}
+
+
+interface org.example.app.service.employee.UserService {
+~ User create(UserDtoRequest)
+~ List<User> getAll()
+~ User getById(Long)
+~ User update(Long,UserDtoRequest)
+~ boolean deleteById(Long)
+}
+
+class org.example.app.repository.employee.UserRepositoryImpl {
++ void save(UserDtoRequest)
++ Optional<List<User>> getAll()
++ Optional<User> getById(Long)
++ void update(Long,UserDtoRequest)
++ boolean deleteById(Long)
++ Optional<User> getLastEntity()
+}
+
+class org.example.app.dto.employee.EmployeeDtoUpdateResponse {
+- int statusCode
+- boolean success
+- String message
+- User employee
++ {static} String SUCCESS_MESSAGE
++ {static} String FAILURE_MESSAGE
++ {static} UserDtoUpdateResponse of(Long,boolean,User)
++ int statusCode()
++ String message()
++ boolean success()
++ User employee()
+}
+
+
+class org.example.app.dto.employee.EmployeeDtoGetListResponse {
+- int statusCode
+- boolean success
+- String message
+- List<User> employeeList
++ {static} String SUCCESS_MESSAGE
++ {static} String FAILURE_MESSAGE
++ {static} UserDtoGetListResponse of(boolean,List<User>)
++ int statusCode()
++ String message()
++ List<User> employeeList()
++ boolean success()
+}
+
+
+class org.example.app.dto.employee.EmployeeDtoGetByIdResponse {
+- int statusCode
+- boolean success
+- String message
+- User employee
++ {static} String SUCCESS_MESSAGE
++ {static} String FAILURE_MESSAGE
++ {static} UserDtoGetByIdResponse of(Long,boolean,User)
++ int statusCode()
++ String message()
++ boolean success()
++ User employee()
+}
+
+
+class org.example.app.dto.employee.EmployeeDtoDeleteResponse {
+- int statusCode
+- boolean success
+- String message
++ {static} String SUCCESS_MESSAGE
++ {static} String FAILURE_MESSAGE
++ {static} UserDtoDeleteResponse of(Long,boolean)
++ int statusCode()
++ String message()
++ boolean success()
+}
+
+
+class org.example.app.dto.employee.EmployeeDtoCreateResponse {
+- int statusCode
+- boolean success
+- String message
+- User employee
++ {static} String SUCCESS_MESSAGE
++ {static} String FAILURE_MESSAGE
++ {static} UserDtoCreateResponse of(boolean,User)
++ int statusCode()
++ String message()
++ boolean success()
++ User employee()
+}
+
+
+class org.example.app.entity.Employee {
+- Long id
+- String firstName
+- String lastName
+- String email
++ Long getId()
++ void setId(Long)
++ String getFirstName()
++ void setFirstName(String)
++ String getLastName()
++ void setLastName(String)
++ String getEmail()
++ void setEmail(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+
+
+
+
+org.example.app.repository.BaseRepository <|-- org.example.app.repository.employee.UserRepository
+jakarta.servlet.http.HttpServlet <|-- org.example.app.controller.EmployeeController
+org.example.app.service.employee.UserService <|.. org.example.app.service.employee.UserServiceImpl
+org.example.app.service.BaseService <|-- org.example.app.service.employee.UserService
+org.example.app.repository.employee.UserRepository <|.. org.example.app.repository.employee.UserRepositoryImpl
+@enduml

@@ -1,0 +1,10 @@
+УВАГА. Альтернативне ДЗ 37.
+На прикладі проекту JServlet-Tomcat-REST, створіть проект JServlet-REST-Employee.
+Сутність Employee має властивості:
+id,
+ім'я,
+посада,
+телефон.
+
+В INFO/SQLs.sql надайте SQL-запити проекту.
+В INFO/REST.txt надайте REST-запити проекту.

@@ -1,0 +1,14 @@
+cd ~/IDEA/HW-JSERVLET-REST-EMPLOYEE &&
+mvn clean &&
+mvn install &&
+mvn war:war &&
+cd ~/Tomcat11/apache-tomcat-11.0.4/bin &&
+./shutdown.sh &&
+cd ~/Tomcat11/apache-tomcat-11.0.4/webapps/ &&
+rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001.war &&
+rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001 &&
+cd ~/Tomcat11/apache-tomcat-11.0.4/work/Catalina/localhost/ &&
+rm -rf HW-JSERVLET-REST-EMPLOYEE-Build-0001 &&
+cp ~/IDEA/HW-JSERVLET-REST-EMPLOYEE/target/HW-JSERVLET-REST-EMPLOYEE-Build-0001.war ~/Tomcat11/apache-tomcat-11.0.4/webapps/ &&
+cd ~/Tomcat11/apache-tomcat-11.0.4/bin &&
+./startup.sh

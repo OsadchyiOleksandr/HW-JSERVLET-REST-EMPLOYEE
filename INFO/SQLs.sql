@@ -1,0 +1,9 @@
+
+CREATE DATABASE hwEmployeeDB;
+
+CREATE TABLE IF NOT EXISTS employees (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    position VARCHAR(255),
+    phone VARCHAR(255)
+);
